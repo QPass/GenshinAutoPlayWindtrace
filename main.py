@@ -72,9 +72,9 @@ imgSpace = cv2.imread('./image/Space.png')
 imgFull = cv2.imread('./image/Full.png')
 imgQ = cv2.imread('./image/Q.png')  # 1808,1028   23,24
 imgE = cv2.imread('./image/E.png')  # 1678,1029  27,21
-imgPlayer1P = cv2.imread('./image/1P.png')   # 349,30    32,28
-imgQuit1 = cv2.imread('./image/Quit1.png')   # 1494,995  279,45
-imgQuit2 = cv2.imread('./image/Quit2.png')   # 876,277  170,46
+imgPlayer1P = cv2.imread('./image/1P.png')  # 349,30    32,28
+imgQuit1 = cv2.imread('./image/Quit1.png')  # 1494,995  279,45
+imgQuit2 = cv2.imread('./image/Quit2.png')  # 876,277  170,46
 
 hashF = aHash(imgF)
 hashF2 = aHash(imgF2)
@@ -109,13 +109,12 @@ while 1:
     Acceptgame = img1[711:711 + 52, 1000:1000 + 325]  # 按钮 接受
     Ready = img1[994:994 + 48, 1539:1539 + 328]  # 按钮 准备就绪
     Space = img1[1028:1028 + 23, 1661:1661 + 62]  # 按键提示图标 空格
-    Full = img1[476:476+77,545:545+824]  # 提示框 达到上限
-    Q = img1[1028:1028+24,1808:1808+23]  # 元素爆发提示
-    E = img1[1029:1029+21,1678:1678+27]  # 元素战技提示
-    Player1P = img1[30:30+28,349:349+32]  # 联机模式提示
-    Quit1 = img1[995:995+45,1494:1494+279]  # 回到单人模式按钮
-    Quit2 = img1[277:277+46,876:876+170]  # 解散队伍按钮
-
+    Full = img1[476:476 + 77, 545:545 + 824]  # 提示框 达到上限
+    Q = img1[1028:1028 + 24, 1808:1808 + 23]  # 元素爆发提示
+    E = img1[1029:1029 + 21, 1678:1678 + 27]  # 元素战技提示
+    Player1P = img1[30:30 + 28, 349:349 + 32]  # 联机模式提示
+    Quit1 = img1[995:995 + 45, 1494:1494 + 279]  # 回到单人模式按钮
+    Quit2 = img1[277:277 + 46, 876:876 + 170]  # 解散队伍按钮
 
     w, a, s, d = img1[395:395 + 180, 395:395 + 180], img1[557:557 + 180, 227:227 + 180], img1[722:722 + 180,
                                                                                          393:393 + 180], img1[
@@ -133,7 +132,17 @@ while 1:
         print('程序出错！请确保原神在前台，不要最小化!')
         break
 
-    if cmpHash(hashF, aHash(F)) == 0 or cmpHash(hashF2, aHash(F2)) == 0:
+    if cmpHash(hashQ, aHash(Q)) == 0 and cmpHash(hashE, aHash(E)) == 0 and cmpHash(hashPlayer1P, aHash(Player1P)) == 0:
+        gamestate = 2  # 可能卡在多人模式
+        print("尝试退出多人模式")
+        time.sleep(2)
+        pg.press("f2")
+        time.sleep(3)
+        pg.click(1656, 1043)
+        time.sleep(2)
+        pg.click(1184, 781)
+        time.sleep(5)
+    elif cmpHash(hashF, aHash(F)) == 0 or cmpHash(hashF2, aHash(F2)) == 0:
         time.sleep(0.5)
         pg.press("f")
         print("尝试与NPC对话")
@@ -175,20 +184,17 @@ while 1:
         pg.press("e")
         gamestate = 0
         print("结束动作")
-
-    elif cmpHash(hashQ,aHash(Q)) == 0 and cmpHash(hashE,aHash(E)) == 0 and cmpHash(hashPlayer1P,aHash(Player1P)) == 0:
-        print("尝试退出多人模式")
-        time.sleep(2)
-        pg.press("f2")
-        time.sleep(3)
-        pg.click(1656,1043)
-        time.sleep(2)
-        pg.click(1184,781)
-        time.sleep(5)
+    elif gamestate == 2 and cmpHash(hashQuit1, aHash(Quit1)) == 0:
+        time.sleep(1)
+        print("尝试踢出非正常留存的玩家")
+        pg.click(1656, 1043)
+    elif gamestate == 2 and cmpHash(hashQuit2, aHash(Quit2)) == 0:
+        time.sleep(1)
+        print("尝试解散队伍")
+        pg.click(1184, 781)
 
     else:
         print("当前画面没有匹配目标")
-
 
     time.sleep(2)
 
