@@ -143,9 +143,9 @@ while 1:
         pg.click(1184, 781)
         time.sleep(5)
     elif cmpHash(hashF, aHash(F)) == 0 or cmpHash(hashF2, aHash(F2)) == 0:
+        print("尝试与NPC对话")
         time.sleep(3)
         pg.press("f")
-        print("尝试与NPC对话")
         time.sleep(3)
         pg.click(1356, 582 + 26)
         gamestate = 0
