@@ -5,7 +5,7 @@
 https://github.com/XiaoMiku01/GenshinAutoPlayBalladsofBreeze
 
 懒人包：
-https://pan.baidu.com/s/1aQlBz9RQkec6SQeZ-KJMvw?pwd=gbe3
+https://pan.baidu.com/s/1oL7E2-sTQ3tYo5PAwPA1xQ?pwd=yawb
 
 ### 语言环境
 python3
