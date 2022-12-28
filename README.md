@@ -39,7 +39,7 @@ python3 -m pip install pywin32
 
 3.确保游戏画面没有被任何窗口遮挡（否则鼠标键盘操作会输入到最上层应用）
 
-4.以管理员权限运行 main.py。（没有python环境就下载懒人包运行.exe文件，windows系统需要右键-以管理员权限运行！！）
+4.以管理员权限运行 main.py。（没有python环境就下载懒人包运行.exe文件，windows系统需要右键-以管理员权限运行！！使用Pycharm之类的IDE运行需要以管理员权限启动Pycharm再运行脚本）
 ```shell
 python3 main.py
 ```
