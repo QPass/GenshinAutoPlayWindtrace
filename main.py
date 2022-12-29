@@ -69,7 +69,7 @@ imgMatchgame = cv2.imread('./image/Matchgame.png')
 imgAcceptgame = cv2.imread('./image/Acceptgame.png')
 imgReady = cv2.imread('./image/Ready.png')
 imgSpace = cv2.imread('./image/Space.png')
-imgFull = cv2.imread('./image/Full.png')
+imgFull = cv2.imread('./image/Full2.png')  # 585,480  745,69
 imgQ = cv2.imread('./image/Q.png')  # 1808,1028   23,24
 imgE = cv2.imread('./image/E.png')  # 1678,1029  27,21
 imgPlayer1P = cv2.imread('./image/1P.png')  # 349,30    32,28
@@ -91,7 +91,7 @@ hashQuit2 = aHash(imgQuit2)
 
 app = QApplication(sys.argv)
 
-print("请以管理员身份运行本程序")
+print("请以管理员权限运行本程序")
 print("请将游戏窗口化，1920x1080分辨率，窗口贴靠在屏幕左上角")
 print("请走到吉盖克斯身边,让【F吉盖克斯】对话框出现在画面中")
 print("请确保游戏画面没有被任何窗口遮挡，程序将在5秒后启动")
@@ -109,7 +109,7 @@ while 1:
     Acceptgame = img1[711:711 + 52, 1000:1000 + 325]  # 按钮 接受
     Ready = img1[994:994 + 48, 1539:1539 + 328]  # 按钮 准备就绪
     Space = img1[1028:1028 + 23, 1661:1661 + 62]  # 按键提示图标 空格
-    Full = img1[476:476 + 77, 545:545 + 824]  # 提示框 达到上限
+    Full = img1[480:480 + 69, 585:585 + 745]  # 提示框 达到上限
     Q = img1[1028:1028 + 24, 1808:1808 + 23]  # 元素爆发提示
     E = img1[1029:1029 + 21, 1678:1678 + 27]  # 元素战技提示
     Player1P = img1[30:30 + 28, 349:349 + 32]  # 联机模式提示
@@ -143,7 +143,7 @@ while 1:
         pg.click(1184, 781)
         time.sleep(5)
     elif cmpHash(hashF, aHash(F)) == 0 or cmpHash(hashF2, aHash(F2)) == 0:
-        print("尝试与NPC对话")
+        print("尝试与NPC对话，如游戏无反应请检查是否以管理员权限运行此脚本")
         time.sleep(3)
         pg.press("f")
         time.sleep(3)
