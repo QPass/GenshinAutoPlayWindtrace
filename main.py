@@ -11,7 +11,7 @@ hwnd_title = dict()
 
 c = ''
 gamestate = 0
-
+goahead = 0
 
 # 均值哈希算法
 def aHash(img):
@@ -69,8 +69,8 @@ imgMatchgame = cv2.imread('./image/Matchgame.png')
 imgAcceptgame = cv2.imread('./image/Acceptgame.png')
 imgReady = cv2.imread('./image/Ready.png')
 imgSpace = cv2.imread('./image/Space.png')
-imgFull = cv2.imread('./image/Full2.png')  # 585,480  745,69
-imgQ = cv2.imread('./image/Q.png')  # 1808,1028   23,24
+imgFull = cv2.imread('./image/Full2.png')
+imgQ = cv2.imread('./image/Q.png')  # 1807,1029   25,21
 imgE = cv2.imread('./image/E.png')  # 1678,1029  27,21
 imgPlayer1P = cv2.imread('./image/1P.png')  # 349,30    32,28
 imgQuit1 = cv2.imread('./image/Quit1.png')  # 1494,995  279,45
@@ -92,8 +92,8 @@ hashQuit2 = aHash(imgQuit2)
 app = QApplication(sys.argv)
 
 print("请以管理员权限运行本程序")
-print("请将游戏窗口化，1920x1080分辨率，窗口贴靠在屏幕左上角")
-print("请走到吉盖克斯身边,让【F吉盖克斯】对话框出现在画面中")
+print("请将游戏设置为*窗口化*，1920x1080分辨率，窗口贴靠在屏幕左上角")
+print("请走到吉盖克斯身边,避开椅子,让【F吉盖克斯】对话框出现在画面中")
 print("请确保游戏画面没有被任何窗口遮挡，程序将在5秒后启动")
 time.sleep(5)
 win32gui.SetForegroundWindow(hwnd)
@@ -108,9 +108,9 @@ while 1:
     Matchgame = img1[991:991 + 52, 1211:1211 + 644]  # 按钮 匹配游戏
     Acceptgame = img1[711:711 + 52, 1000:1000 + 325]  # 按钮 接受
     Ready = img1[994:994 + 48, 1539:1539 + 328]  # 按钮 准备就绪
-    Space = img1[1028:1028 + 23, 1661:1661 + 62]  # 按键提示图标 空格
-    Full = img1[480:480 + 69, 585:585 + 745]  # 提示框 达到上限
-    Q = img1[1028:1028 + 24, 1808:1808 + 23]  # 元素爆发提示
+    Space = img1[1032:1032 + 14, 1665:1665 + 53]  # 按键提示图标 空格
+    Full = img1[278:278 + 41, 922:922 + 76]  # 提示框 达到上限
+    Q = img1[1029:1029 + 21, 1807:1807 + 25]  # 元素爆发提示
     E = img1[1029:1029 + 21, 1678:1678 + 27]  # 元素战技提示
     Player1P = img1[30:30 + 28, 349:349 + 32]  # 联机模式提示
     Quit1 = img1[995:995 + 45, 1494:1494 + 279]  # 回到单人模式按钮
@@ -142,14 +142,19 @@ while 1:
         time.sleep(2)
         pg.click(1184, 781)
         time.sleep(5)
+        goahead = 1
     elif cmpHash(hashF, aHash(F)) == 0 or cmpHash(hashF2, aHash(F2)) == 0:
         print("尝试与NPC对话，如游戏无反应请检查是否以管理员权限运行此脚本")
         time.sleep(3)
         pg.press("f")
         time.sleep(3)
-        pg.click(1356, 582 + 26)
-        gamestate = 0
+        pg.click(1356, 657 + 26)
         print("鼠标点击 游玩风行迷踪")
+        time.sleep(3)
+        pg.click(1356, 657 + 26)
+        gamestate = 0
+        print("好，您来这边...")
+        goahead = 0
     elif cmpHash(hashFull, aHash(Full)) == 0:
         print("迷踪币已达上限，程序停止运行")
         break
@@ -169,7 +174,7 @@ while 1:
         gamestate = 1
         print("鼠标点击 准备就绪")
 
-    elif gamestate == 1 and cmpHash(hashSpace, aHash(Space)) == 0:
+    elif gamestate == 1 and (cmpHash(hashSpace, aHash(Space)) == 0 or cmpHash(hashQ, aHash(Q)) == 0):
         time.sleep(3)
         print("开始游戏")
         pg.keyDown("w")
@@ -192,6 +197,14 @@ while 1:
         time.sleep(1)
         print("尝试解散队伍")
         pg.click(1184, 781)
+    elif goahead == 1 and cmpHash(hashQ, aHash(Q)) == 0 and cmpHash(hashE, aHash(E)) == 0 and cmpHash(hashF, aHash(F)) != 0:
+        time.sleep(4)
+        if cmpHash(hashQ, aHash(Q)) == 0 and cmpHash(hashE, aHash(E)) == 0:
+            print("尝试接近吉盖克斯")
+            pg.keyDown("w")
+            time.sleep(2)
+            pg.keyUp("w")
+            goahead = 0
 
     else:
         print("当前画面没有匹配目标")

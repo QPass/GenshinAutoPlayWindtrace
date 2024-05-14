@@ -1,10 +1,10 @@
 # GenshinAutoPlayWindtrace
-原神风行迷踪自动挂机辅助（已适配1920*1080分辨率，支持PC端3.3版本简体中文界面）
+原神风行迷踪自动挂机辅助（已适配1920*1080分辨率，支持PC端4.6版本简体中文界面）
 
 原项目：
 https://github.com/XiaoMiku01/GenshinAutoPlayBalladsofBreeze
 
-懒人包：
+懒人包（暂不支持4.6版本，待更新）：
 https://pan.baidu.com/s/1oL7E2-sTQ3tYo5PAwPA1xQ?pwd=yawb
 
 ### 语言环境
