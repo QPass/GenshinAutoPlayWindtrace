@@ -4,8 +4,8 @@
 原项目：
 https://github.com/XiaoMiku01/GenshinAutoPlayBalladsofBreeze
 
-懒人包（暂不支持4.6版本，待更新）：
-https://pan.baidu.com/s/1oL7E2-sTQ3tYo5PAwPA1xQ?pwd=yawb
+懒人包（已适配4.6版本）：
+https://pan.baidu.com/s/1MEJxNw-0mIjeRrzuduTlww?pwd=1234
 
 ### 语言环境
 python3
